@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bacon Ipsum API</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="2xl:container bg-black flex justify-center items-center h-screen p-8">
+    <div class="flex flex-col justify-center items-center bg-gray-500  gap-4 p-4 rounded-lg">
+        <div><p id="api-msg" class="border-2 p-2 bg-white rounded-lg">You can get a <b>Bacon Ipsum API</b> data</p></div>
+        <div class="flex flex-col justify-center items-center">
+            <!-- GET button -->
+            <div>
+                <button id="btn" type="button" class=" px-2 py-1 bg-green-400 rounded-lg  ">GET</button>
+            </div>
+            <!-- Loading indicator, initially hidden -->
+            <div id="loading" class="hidden">
+                <button type="button" class="bg-indigo-500 flex px-2 py-1 rounded-lg gap-1" disabled  >
+                    <svg class="animate-spin h-5 w-5 " xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-loader"><path d="M12 2v4"/><path d="m16.2 7.8 2.9-2.9"/><path d="M18 12h4"/><path d="m16.2 16.2 2.9 2.9"/><path d="M12 18v4"/><path d="m4.9 19.1 2.9-2.9"/><path d="M2 12h4"/><path d="m4.9 4.9 2.9 2.9"/></svg>
+                    <p class="">Processing...</p>
+                  </button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+          // Get references to DOM elements
+         const btn=document.getElementById("btn");
+         const msg=document.getElementById("api-msg");
+         const loading = document.getElementById("loading");
+         // Function to fetch data from the API
+        const fetchData=async()=>{
+             // Hide button and show loading indicator
+            btn.classList.add('hidden');
+            loading.classList.remove('hidden');
+            try{
+                // Fetch data from the API
+                const res=await fetch("https://baconipsum.com/api/?type=all")
+                console.log(res);
+                // Parsing response in Json format
+                const data=await res.json();
+                console.log(data);
+                // Display fetched data
+                msg.textContent = data.join('');
+            }catch(err){
+                 // Handle errors
+                console.log(err);
+                msg.textContent = "An error occurred while fetching data.";
+            }
+            // Show button and hide loading indicator
+            btn.classList.remove('hidden');
+            loading.classList.add('hidden');
+        }
+        // Add click event listener to the button
+        btn.addEventListener("click",()=>{
+            fetchData(); 
+        });
+    </script>
+   
+</body>
+</html>

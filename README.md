@@ -28,7 +28,7 @@ You need a web browser to view the project. Ensure you have a modern web browser
 1. Clone the repository to your local machine:
 
     ```sh
-    git clone https://github.com/yourusername/bacon-ipsum-api-fetcher.git
+    git clone https://github.com/naveen-kumar-k-30/bacon-ipsum-api-fetcher.git
     ```
 
 2. Navigate to the project directory:
